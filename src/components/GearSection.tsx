@@ -23,7 +23,7 @@ export const GearSection: React.FC = () => {
   ];
 
   return (
-    <section id="gear" className="relative min-h-screen bg-canvas px-4 md:px-6 dsk:px-8 py-24 md:py-36 flex flex-col justify-between overflow-hidden">
+    <section id="gear" className="relative min-h-[140vh] bg-canvas px-4 md:px-8 dsk:px-16 py-32 flex flex-col justify-between overflow-hidden">
       {/* Top Header */}
       <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 pb-12 border-b border-ink/15">
         <div className="flex items-center gap-4">

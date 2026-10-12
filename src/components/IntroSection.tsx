@@ -22,10 +22,10 @@ export const IntroSection: React.FC = () => {
   ];
 
   return (
-    <section id="intro-section" className="relative bg-canvas px-4 md:px-6 dsk:px-8 py-24 md:py-36 border-y border-[rgba(36,54,63,0.16)]">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 dsk:grid-cols-12 gap-12 items-center">
+    <section id="intro-section" className="relative min-h-screen flex items-center bg-canvas px-4 md:px-8 dsk:px-16 py-32 border-y border-ink/15">
+      <div className="max-w-7xl w-full mx-auto grid grid-cols-1 dsk:grid-cols-12 gap-12 items-center">
         {/* Kinetic Typography */}
-        <div className="dsk:col-span-8 flex flex-wrap items-baseline gap-x-4 gap-y-2 md:gap-x-6 md:gap-y-4">
+        <div className="dsk:col-span-8 flex flex-wrap items-baseline gap-x-4 gap-y-3 md:gap-x-6 md:gap-y-4">
           {words.map((w, idx) => {
             const hasVideo = !!w.video;
             return (

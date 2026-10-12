@@ -11,20 +11,20 @@ export const HeroSection: React.FC = () => {
   return (
     <section
       id="hero"
-      className="relative flex h-svh flex-col justify-between overflow-hidden bg-canvas px-4 md:px-6 dsk:px-8 pt-20 pb-8"
+      className="relative flex min-h-screen flex-col justify-between overflow-hidden bg-canvas px-4 md:px-8 dsk:px-12 pt-24 pb-8"
     >
       {/* Background Curtain & Watermark Backdrop */}
-      <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(180deg,#dde5e9_0%,#fdfdfd_100%)] z-0">
-        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 aspect-2515/723 w-full opacity-60">
+      <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(180deg,#dde5e9_0%,#fdfdfd_100%)] z-0 flex items-center justify-center overflow-hidden">
+        <div className="w-full max-w-[1440px] px-4 md:px-8 aspect-[26/12] opacity-100 flex items-center justify-center -translate-y-8">
           <div
-            className="absolute inset-0 bg-center bg-no-repeat bg-size-[100%_auto] transition-all duration-1000"
+            className="w-full h-full bg-center bg-no-repeat bg-contain transition-all duration-700"
             style={{ backgroundImage: 'url(/hero/promptedsite.svg)' }}
           />
         </div>
       </div>
 
       {/* Spacer for 3D Drone focal area */}
-      <div className="relative min-h-0 flex-1 pointer-events-none" />
+      <div className="relative min-h-[45vh] flex-1 pointer-events-none" />
 
       {/* Bottom Content Bar */}
       <div className="relative z-10 flex flex-col gap-4 md:grid md:grid-cols-12 md:items-end md:gap-0 pt-6 border-t border-[rgba(36,54,63,0.12)]">

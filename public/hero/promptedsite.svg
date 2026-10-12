@@ -1,15 +1,18 @@
-<svg width="2515" height="723" viewBox="0 0 2515 723" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="2600" height="1200" viewBox="0 0 2600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="promptedsite_fill" x1="1257" y1="0" x2="1257" y2="723" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FDFDFD" stop-opacity="0.8"/>
-      <stop offset="0.25" stop-color="#FDFDFD" stop-opacity="0.25"/>
-      <stop offset="1" stop-color="#FDFDFD" stop-opacity="0"/>
+    <linearGradient id="promptedsite_fill" x1="1300" y1="0" x2="1300" y2="1200" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#24363F" stop-opacity="0.22"/>
+      <stop offset="0.5" stop-color="#24363F" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#24363F" stop-opacity="0.03"/>
     </linearGradient>
-    <linearGradient id="promptedsite_stroke" x1="1257" y1="0" x2="1257" y2="723" gradientUnits="userSpaceOnUse">
-      <stop stop-color="white" stop-opacity="0.9"/>
-      <stop offset="0.7" stop-color="white" stop-opacity="0.2"/>
-      <stop offset="1" stop-color="white" stop-opacity="0"/>
+    <linearGradient id="promptedsite_stroke" x1="1300" y1="0" x2="1300" y2="1200" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#24363F" stop-opacity="0.55"/>
+      <stop offset="0.6" stop-color="#24363F" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#24363F" stop-opacity="0.12"/>
     </linearGradient>
   </defs>
-  <text x="50%" y="68%" text-anchor="middle" font-family="'Switzer', -apple-system, BlinkMacSystemFont, sans-serif" font-weight="300" font-size="340" letter-spacing="14" fill="url(#promptedsite_fill)" stroke="url(#promptedsite_stroke)" stroke-width="2.5">PROMPTEDSITE</text>
+  <g font-family="'Switzer', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-weight="700" fill="url(#promptedsite_fill)" stroke="url(#promptedsite_stroke)" stroke-width="4">
+    <text x="50%" y="42%" text-anchor="middle" font-size="280" letter-spacing="16">PROMPTED</text>
+    <text x="50%" y="82%" text-anchor="middle" font-size="280" letter-spacing="86">SITE</text>
+  </g>
 </svg>
