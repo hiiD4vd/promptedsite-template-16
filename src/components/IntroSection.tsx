@@ -1,3 +1,4 @@
+import { mediaUrl } from '../config/media';
 import React, { useState } from 'react';
 
 interface WordItem {
@@ -7,14 +8,14 @@ interface WordItem {
 }
 
 export const IntroSection: React.FC = () => {
-  const [activeVideo, setActiveVideo] = useState<string>('/intro/video1.mp4');
+  const [activeVideo, setActiveVideo] = useState<string>(mediaUrl('/intro/video1.mp4'));
 
   const words: WordItem[] = [
     { text: 'Detecting' },
-    { text: 'cracks,', muted: true, video: '/intro/video1.mp4' },
-    { text: 'deformations', muted: true, video: '/intro/video2.mp4' },
+    { text: 'cracks,', muted: true, video: mediaUrl('/intro/video1.mp4') },
+    { text: 'deformations', muted: true, video: mediaUrl('/intro/video2.mp4') },
     { text: 'and' },
-    { text: 'structural risks', muted: true, video: '/intro/video3.mp4' },
+    { text: 'structural risks', muted: true, video: mediaUrl('/intro/video3.mp4') },
     { text: 'before' },
     { text: 'they' },
     { text: 'become' },

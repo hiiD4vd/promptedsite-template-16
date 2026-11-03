@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { mediaUrl } from '../config/media';
+import React, { useState, useEffect, useRef } from 'react';
 
-interface HeaderProps {
-  onNavigate?: (id: string) => void;
-}
-
-export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
+export const Header: React.FC = () => {
   const [timeStr, setTimeStr] = useState<string>('');
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const updateTime = () => {
@@ -23,6 +21,19 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const trigger = menuButtonRef.current;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMenuOpen(false);
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      trigger?.focus();
+    };
+  }, [menuOpen]);
+
   const navLinks = [
     { label: 'Gear', href: '#gear' },
     { label: 'Solutions', href: '#solutions' },
@@ -35,7 +46,8 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
     setMenuOpen(false);
     const target = document.querySelector(href);
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
+      target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+      history.replaceState(null, '', href);
     }
   };
 
@@ -44,7 +56,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
       {/* Brand & Tagline */}
       <div className="flex items-center gap-3">
         <a href="#hero" className="flex items-center gap-2 group">
-          <img src="/nav/promptedsite.svg" alt="Promptedsite" className="size-6 transition-transform group-hover:rotate-45" />
+          <img src={mediaUrl("/nav/promptedsite.svg")} alt="Promptedsite" className="size-6 transition-transform group-hover:rotate-45" />
           <span className="font-sans font-medium text-lg tracking-[-0.4px] text-ink uppercase">
             Promptedsite
           </span>
@@ -75,7 +87,11 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
           {timeStr}
         </div>
         <button
+          ref={menuButtonRef}
           onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
           className="md:hidden flex items-center justify-center px-3 py-1 text-xs font-mono rounded border border-ink/20 text-ink hover:bg-ink/5"
         >
           {menuOpen ? 'CLOSE' : 'MENU'}
@@ -84,7 +100,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
 
       {/* Mobile Drawer Menu */}
       {menuOpen && (
-        <div className="md:hidden fixed inset-x-0 top-[60px] bg-white border-b border-[#24363f]/15 p-6 flex flex-col gap-4 shadow-xl animate-in slide-in-from-top-4">
+        <div id="mobile-menu" className="md:hidden fixed inset-x-0 top-[60px] bg-white border-b border-[#24363f]/15 p-6 flex flex-col gap-4 shadow-xl animate-in slide-in-from-top-4">
           {navLinks.map((link) => (
             <a
               key={link.label}

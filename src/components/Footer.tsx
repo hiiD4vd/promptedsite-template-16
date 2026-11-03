@@ -1,3 +1,4 @@
+import { mediaUrl } from '../config/media';
 import React from 'react';
 
 export const Footer: React.FC = () => {
@@ -25,7 +26,7 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-2">
-              <img src="/nav/promptedsite.svg" alt="Promptedsite" className="size-6" />
+              <img src={mediaUrl("/nav/promptedsite.svg")} alt="Promptedsite" className="size-6" />
               <span className="font-sans font-medium text-xl tracking-tight text-ink uppercase">
                 PROMPTEDSITE
               </span>
