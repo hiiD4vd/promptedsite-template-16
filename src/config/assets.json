@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "project": "promptedsite-template-16",
+  "release": "7183437ff0535f7b",
+  "prefix": "templates/promptedsite-template-16/releases/7183437ff0535f7b",
+  "baseUrl": "https://cdn.promptedsite.com/templates/promptedsite-template-16/releases/7183437ff0535f7b",
+  "totalBytes": 21892930,
+  "files": {
+    "apple-icon.png": {
+      "bytes": 950,
+      "sha256": "bfd598f168e9b298c53603970dc4e3cd8f6463e7c85fdaa559d942215a6dc34e",
+      "contentType": "image/png"
+    },
+    "capabilities/terrain-morph.glb": {
+      "bytes": 2618140,
+      "sha256": "49f5aa090ab5c850b7a42e294e2d3255ed400c1471e1bce94247d7d43682a9ce",
+      "contentType": "model/gltf-binary"
+    },
+    "drone/body_baseColor.webp": {
+      "bytes": 342110,
+      "sha256": "2831a81e758c8d1c2a51342fa704e2e41572bf6a4348603b359114d0c7beee85",
+      "contentType": "image/webp"
+    },
+    "drone/body_normal.webp": {
+      "bytes": 782282,
+      "sha256": "f84e7fe772ae9aabb2f43375bf86183ced012d9a2c325e91f464ee54a607db11",
+      "contentType": "image/webp"
+    },
+    "drone/drone-env.jpg": {
+      "bytes": 37598,
+      "sha256": "4b1ba2b1f41e413931b4da3597c62665f1e80fe2b2496405599db9048abb0adc",
+      "contentType": "image/jpeg"
+    },
+    "drone/drone.glb": {
+      "bytes": 3591092,
+      "sha256": "5945d24fe25ed0914f1a1237748bfae25d533e3b5e1a9b08b6a61f0fc4b38024",
+      "contentType": "model/gltf-binary"
+    },
+    "fonts/ProtoMono-Light.woff2": {
+      "bytes": 15364,
+      "sha256": "c485202a3ee6e477dd0b4ea1c4878ca24c678cc0afb56be3b93e87a29b493801",
+      "contentType": "font/woff2"
+    },
+    "fonts/Switzer-Variable.woff2": {
+      "bytes": 43220,
+      "sha256": "d1bf801ffb1a6096def70a7c532255722ad87d948b13a8a586e342f7091f8ee4",
+      "contentType": "font/woff2"
+    },
+    "footer/promptedsite.svg": {
+      "bytes": 285,
+      "sha256": "5ca017ec6ba5a1a280d10759fdeadab3b122afb68dbf09379610eeb1ed71f71f",
+      "contentType": "image/svg+xml"
+    },
+    "gear/gear-anims/gear-anim-01.riv": {
+      "bytes": 1065,
+      "sha256": "f925873f6f33f532ad8fe7e8c077770c82ebbe662855ac7e7c78b7c849515325",
+      "contentType": "application/octet-stream"
+    },
+    "gear/gear-anims/gear-anim-02.riv": {
+      "bytes": 1825,
+      "sha256": "e94438c34b167dca16c2232bb0e493e955a81994a66e73357e0738ecd15c5121",
+      "contentType": "application/octet-stream"
+    },
+    "gear/gear-anims/gear-anim-03.riv": {
+      "bytes": 1174,
+      "sha256": "19442346496694ee45cb8318ab16001939895d92c4899ce747f9ccd7da88ec13",
+      "contentType": "application/octet-stream"
+    },
+    "hero/drone_scroll_animation.riv": {
+      "bytes": 932,
+      "sha256": "423732664e306de14388a7376151ef6c627c87b94756996d3fd9a24b6769fd6d",
+      "contentType": "application/octet-stream"
+    },
+    "hero/promptedsite.svg": {
+      "bytes": 1175,
+      "sha256": "9ee193e176131ab5844be09237e15eef68826368998b2a8fea3581ee953534c4",
+      "contentType": "image/svg+xml"
+    },
+    "icon.png": {
+      "bytes": 3145,
+      "sha256": "1deb89f945f1d4255abac9d2a44eeaf3c81756ec1d659e7bbfd7d6688a67ee3f",
+      "contentType": "image/png"
+    },
+    "intro/video1.mp4": {
+      "bytes": 1270026,
+      "sha256": "aeaf80a758bf2ba1159a404f9fe30149ccfe07c22830a943fa413c6a6e4ce49b",
+      "contentType": "video/mp4"
+    },
+    "intro/video2.mp4": {
+      "bytes": 873472,
+      "sha256": "d1365dd0ed4fb16c7802523d890720eda9b8cb09f2aac13b87804cc707f3d3c5",
+      "contentType": "video/mp4"
+    },
+    "intro/video3.mp4": {
+      "bytes": 3277364,
+      "sha256": "ceefc8aac67fb8b9c4e661b98a8e4153171a361cf010c9b6cf6998c3f22aef26",
+      "contentType": "video/mp4"
+    },
+    "nav/promptedsite.svg": {
+      "bytes": 1191,
+      "sha256": "55f4abb81898f18306cd5c33f830d0e236752ccf560845b788a50849f6ee98e0",
+      "contentType": "image/svg+xml"
+    },
+    "software/NewTerreain_006.glb": {
+      "bytes": 1817960,
+      "sha256": "ba9980a43aba72381f11342768f8768630f9f8f07f3c84bbeeb6d05b2820255a",
+      "contentType": "model/gltf-binary"
+    },
+    "software/PXGwhite.jpg": {
+      "bytes": 21654,
+      "sha256": "35b3777d0778c5c008bc7d471c096f2c01f337a535e5fffa12bf655ee7d2a1df",
+      "contentType": "image/jpeg"
+    },
+    "software/cross-small.svg": {
+      "bytes": 238,
+      "sha256": "c70ba872dc2c5d7455cb6c041efa1d027035960a4dcdbb06ddf2ded9b86c6298",
+      "contentType": "image/svg+xml"
+    },
+    "software/minus-small.svg": {
+      "bytes": 191,
+      "sha256": "093a72b4872fac4452b23e99b8b5c9efcd8ec760e7346c02c2e426451b602873",
+      "contentType": "image/svg+xml"
+    },
+    "software/plus-small.svg": {
+      "bytes": 228,
+      "sha256": "b90094f09d0ccca1a25de5e98845be5ca0b39922126d9c3d4902d5c75594aed1",
+      "contentType": "image/svg+xml"
+    },
+    "solutions/energy.mp4": {
+      "bytes": 2725710,
+      "sha256": "86980615989ebdc95aabbbb8cc3694ed3d8e6b32c18ade5b0608426b4c72ed55",
+      "contentType": "video/mp4"
+    },
+    "solutions/geospatial.mp4": {
+      "bytes": 1293681,
+      "sha256": "3f808afc6f7a9c40b8984363ad9ec55a5d64be887b45ed7c3f26fb0eed79ef2c",
+      "contentType": "video/mp4"
+    },
+    "solutions/industry.mp4": {
+      "bytes": 1288432,
+      "sha256": "70c7d48bdbbdadd83643f0d3554d75edde199ce0c15762de88c3929b2f862b62",
+      "contentType": "video/mp4"
+    },
+    "solutions/infrastructure.mp4": {
+      "bytes": 1882426,
+      "sha256": "07d66f07f5c9ab7915a13fe0fba9f7092d3b2964920527f863216c2352b405c2",
+      "contentType": "video/mp4"
+    }
+  }
+}
