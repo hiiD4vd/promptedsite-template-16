@@ -1,36 +1,42 @@
-import React, { useEffect, useRef } from 'react';
+import { mediaUrl } from '../config/media';
+import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
+import { disposeScene } from '../engine/disposeScene';
 import {
   DRONE_MODEL_URL,
   DRONE_ENV_URL,
   PROPELLER_SPEED,
   REVEAL_START_FRAME,
-  ANIMATION_END_FRAME,
   FPS,
 } from '../engine/constants';
 
 export const DroneOverlay: React.FC = () => {
+  const [unavailable, setUnavailable] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    let disposed = false;
+    const ownedTextures = new Set<THREE.Texture>();
 
     let width = window.innerWidth;
     let height = window.innerHeight;
 
     // Scene & Renderer
     const scene = new THREE.Scene();
-    const renderer = new THREE.WebGLRenderer({
+    let renderer: THREE.WebGLRenderer;
+    try { renderer = new THREE.WebGLRenderer({
       canvas: canvas,
       alpha: true,
       antialias: true,
       powerPreference: 'high-performance',
-    });
+    }); } catch { setUnavailable(true); return; }
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -44,6 +50,8 @@ export const DroneOverlay: React.FC = () => {
     // Environment Lighting
     const textureLoader = new THREE.TextureLoader();
     textureLoader.load(DRONE_ENV_URL, (texture) => {
+      if (disposed) { texture.dispose(); return; }
+      ownedTextures.add(texture);
       texture.mapping = THREE.EquirectangularReflectionMapping;
       scene.environment = texture;
     });
@@ -76,12 +84,15 @@ export const DroneOverlay: React.FC = () => {
     gltfLoader.load(
       DRONE_MODEL_URL,
       (gltf) => {
+        if (disposed) { disposeScene(gltf.scene); return; }
         droneScene = gltf.scene;
         scene.add(droneScene);
 
         // Apply clean rebranded textures to remove baked original logo on fuselage
         const bodyTextureLoader = new THREE.TextureLoader();
-        bodyTextureLoader.load('/drone/body_baseColor.webp?v=2', (tex) => {
+        bodyTextureLoader.load(mediaUrl('/drone/body_baseColor.webp?v=2'), (tex) => {
+          if (disposed) { tex.dispose(); return; }
+          ownedTextures.add(tex);
           tex.flipY = false;
           tex.colorSpace = THREE.SRGBColorSpace;
           droneScene?.traverse((node) => {
@@ -97,7 +108,9 @@ export const DroneOverlay: React.FC = () => {
           });
         });
 
-        bodyTextureLoader.load('/drone/body_normal.webp?v=2', (normTex) => {
+        bodyTextureLoader.load(mediaUrl('/drone/body_normal.webp?v=2'), (normTex) => {
+          if (disposed) { normTex.dispose(); return; }
+          ownedTextures.add(normTex);
           normTex.flipY = false;
           droneScene?.traverse((node) => {
             if (node instanceof THREE.Mesh && node.material) {
@@ -142,6 +155,7 @@ export const DroneOverlay: React.FC = () => {
       },
       undefined,
       (error) => {
+        if (!disposed) setUnavailable(true);
         console.error('Error loading drone model:', error);
       }
     );
@@ -244,7 +258,7 @@ export const DroneOverlay: React.FC = () => {
       if (droneScene) {
         // Propeller rotation
         const isLanding = currentFrame > 940;
-        if (!isLanding) {
+        if (!isLanding && !reducedMotion.matches) {
           propellerNodes.forEach((node) => {
             node.rotation.z += PROPELLER_SPEED * delta;
           });
@@ -252,12 +266,12 @@ export const DroneOverlay: React.FC = () => {
 
         // Flight coordinates + floating hover physics
         droneScene.position.x = currentPos.x;
-        droneScene.position.y = currentPos.y + Math.sin(time * 1.8) * 0.03;
+        droneScene.position.y = currentPos.y + (reducedMotion.matches ? 0 : Math.sin(time * 1.8) * 0.03);
         droneScene.position.z = currentPos.z;
 
         droneScene.rotation.x = currentRot.x;
         droneScene.rotation.y = currentRot.y;
-        droneScene.rotation.z = currentRot.z + Math.cos(time * 1.5) * 0.015;
+        droneScene.rotation.z = currentRot.z + (reducedMotion.matches ? 0 : Math.cos(time * 1.5) * 0.015);
 
         // Gimbal subtle response
         if (gimbalNodes.lr) gimbalNodes.lr.rotation.y = mouse.x * 0.25;
@@ -294,10 +308,14 @@ export const DroneOverlay: React.FC = () => {
     window.addEventListener('resize', handleResize);
 
     return () => {
+      disposed = true;
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationId);
+      mixer?.stopAllAction();
+      if (droneScene) disposeScene(droneScene);
+      ownedTextures.forEach((texture) => texture.dispose());
       dracoLoader.dispose();
       renderer.dispose();
     };
@@ -309,6 +327,7 @@ export const DroneOverlay: React.FC = () => {
       className="drone-overlay-clip fixed inset-0 pointer-events-none z-10 overflow-hidden"
     >
       <div className="drone-overlay-shift size-full">
+        {unavailable && <p role="status" className="absolute left-6 top-24 text-sm">3D preview requires WebGL. Page content remains available.</p>}
         <canvas ref={canvasRef} className="drone-overlay-canvas size-full block" />
       </div>
     </div>

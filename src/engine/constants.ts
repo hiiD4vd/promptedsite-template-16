@@ -1,7 +1,8 @@
-export const DRONE_MODEL_URL = '/drone/drone.glb';
-export const DRONE_ENV_URL = '/drone/drone-env.jpg';
-export const CAP_PARTICLE_TERRAIN_URL = '/capabilities/terrain-morph.glb';
-export const SOFTWARE_TERRAIN_URL = '/software/NewTerreain_006.glb';
+import { mediaUrl } from '../config/media';
+export const DRONE_MODEL_URL = mediaUrl('/drone/drone.glb');
+export const DRONE_ENV_URL = mediaUrl('/drone/drone-env.jpg');
+export const CAP_PARTICLE_TERRAIN_URL = mediaUrl('/capabilities/terrain-morph.glb');
+export const SOFTWARE_TERRAIN_URL = mediaUrl('/software/NewTerreain_006.glb');
 
 export const TOTAL_FRAMES = 1038;
 export const ANIMATION_END_FRAME = 350;
