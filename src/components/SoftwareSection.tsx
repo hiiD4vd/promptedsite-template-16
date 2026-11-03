@@ -1,8 +1,10 @@
+import { mediaUrl } from '../config/media';
 import React, { useState, useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
+import { disposeScene } from '../engine/disposeScene';
 
 interface MarkerPoint {
   id: string;
@@ -54,11 +56,13 @@ export const SoftwareSection: React.FC = () => {
   ];
 
   const [activePoint, setActivePoint] = useState<MarkerPoint | null>(points[0]);
+  const [unavailable, setUnavailable] = useState(false);
   const canvasContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const container = canvasContainerRef.current;
     if (!container) return;
+    let disposed = false;
 
     const width = container.clientWidth;
     const height = container.clientHeight || 560;
@@ -70,7 +74,9 @@ export const SoftwareSection: React.FC = () => {
     camera.position.set(3.96, 2.85, -1.8);
     camera.lookAt(-0.1, 1.2, -1);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    let renderer: THREE.WebGLRenderer;
+    try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); }
+    catch { setUnavailable(true); return; }
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -85,7 +91,7 @@ export const SoftwareSection: React.FC = () => {
 
     // Texture matcap
     const textureLoader = new THREE.TextureLoader();
-    const matcap = textureLoader.load('/software/PXGwhite.jpg');
+    const matcap = textureLoader.load(mediaUrl('/software/PXGwhite.jpg'));
 
     // Loaders with Draco and Meshopt
     const dracoLoader = new DRACOLoader();
@@ -97,8 +103,9 @@ export const SoftwareSection: React.FC = () => {
 
     let terrainMesh: THREE.Object3D | null = null;
     gltfLoader.load(
-      '/software/NewTerreain_006.glb',
+      mediaUrl('/software/NewTerreain_006.glb'),
       (gltf) => {
+        if (disposed) { disposeScene(gltf.scene); return; }
         terrainMesh = gltf.scene;
         terrainMesh.traverse((child) => {
           if ((child as THREE.Mesh).isMesh) {
@@ -113,7 +120,8 @@ export const SoftwareSection: React.FC = () => {
       },
       undefined,
       (err) => {
-        console.warn('Failed to load terrain glb, fallback procedural terrain', err);
+        if (!disposed) setUnavailable(true);
+        console.warn('Terrain model unavailable', err);
       }
     );
 
@@ -138,8 +146,11 @@ export const SoftwareSection: React.FC = () => {
     window.addEventListener('resize', handleResize);
 
     return () => {
+      disposed = true;
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationFrameId);
+      if (terrainMesh) disposeScene(terrainMesh);
+      matcap.dispose();
       if (renderer.domElement.parentElement) {
         renderer.domElement.parentElement.removeChild(renderer.domElement);
       }
@@ -176,12 +187,16 @@ export const SoftwareSection: React.FC = () => {
       <div className="relative mt-12 w-full h-[520px] md:h-[640px] rounded-2xl overflow-hidden border border-ink/15 shadow-inner bg-[#D8E0E3]">
         {/* Three.js Topography Canvas Container */}
         <div ref={canvasContainerRef} className="absolute inset-0 size-full" />
+        {unavailable && <p role="status" className="relative p-6">3D terrain preview unavailable. Inspection details remain accessible below.</p>}
 
         {/* Overlay Point Cloud Pins */}
         {points.map((pt) => {
           const isSelected = activePoint?.id === pt.id;
           return (
-            <div
+            <button
+              type="button"
+              aria-label={`Inspect ${pt.title}`}
+              aria-pressed={isSelected}
               key={pt.id}
               style={{ left: `${pt.x}%`, top: `${pt.y}%` }}
               onClick={() => setActivePoint(pt)}
@@ -196,7 +211,7 @@ export const SoftwareSection: React.FC = () => {
               >
                 {pt.id}
               </div>
-            </div>
+            </button>
           );
         })}
 

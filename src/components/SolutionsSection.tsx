@@ -1,3 +1,4 @@
+import { mediaUrl } from '../config/media';
 import React, { useState } from 'react';
 
 interface StatItem {
@@ -21,7 +22,7 @@ export const SolutionsSection: React.FC = () => {
       name: 'Energy',
       paragraphs:
         'Modern grids span thousands of acres of terrain that ground crews can no longer monitor at scale.\n\nLiDAR-equipped UAVs eliminate access risk while cutting inspection cycles from weeks to hours.',
-      video: '/solutions/energy.mp4',
+      video: mediaUrl('/solutions/energy.mp4'),
       stats: [
         { plain: { label: 'Scope', value: '360°' }, meter: { label: 'Scan modes', value: '2', bar: 0.72 } },
         { plain: { label: 'Coverage', value: '100 km²/day' }, meter: { label: 'Max altitude [m]', value: '500', bar: 0.95 } },
@@ -34,7 +35,7 @@ export const SolutionsSection: React.FC = () => {
       name: 'Geospatial',
       paragraphs:
         'City-scale digital twins and topographic surveys demand data density that satellite and traditional aerial methods cannot consistently deliver.\n\nDrone LiDAR captures 100–500 points per square meter at centimeter-level accuracy.',
-      video: '/solutions/geospatial.mp4',
+      video: mediaUrl('/solutions/geospatial.mp4'),
       stats: [
         { plain: { label: 'Scope', value: '360°' }, meter: { label: 'Scan modes', value: '2', bar: 0.72 } },
         { plain: { label: 'Coverage', value: '10 km²/flight' }, meter: { label: 'GSD [cm]', value: '3', bar: 0.62 } },
@@ -47,7 +48,7 @@ export const SolutionsSection: React.FC = () => {
       name: 'Industry',
       paragraphs:
         'Stockpile volumes, pit wall stability, and conveyor structures in active industrial sites require data that no ground crew can safely collect.\n\nDrone LiDAR surveys replace hours of manual work with a single autonomous flight.',
-      video: '/solutions/industry.mp4',
+      video: mediaUrl('/solutions/industry.mp4'),
       stats: [
         { plain: { label: 'Scope', value: '360°' }, meter: { label: 'Scan modes', value: '2', bar: 0.72 } },
         { plain: { label: 'Coverage', value: '1.2 km × 1 km' }, meter: { label: 'Accuracy [%]', value: '1-3', bar: 0.62 } },
@@ -60,7 +61,7 @@ export const SolutionsSection: React.FC = () => {
       name: 'Infrastructure',
       paragraphs:
         'Bridges, tunnels, dams and road networks demand inspection cycles that traditional methods can no longer sustain.\n\nAutonomous LiDAR scanning eliminates access risk and cuts survey time by up to 80%.',
-      video: '/solutions/infrastructure.mp4',
+      video: mediaUrl('/solutions/infrastructure.mp4'),
       stats: [
         { plain: { label: 'Scope', value: '360°' }, meter: { label: 'Scan modes', value: '60', bar: 0.72 } },
         { plain: { label: 'Scout time', value: '< 40 min' }, meter: { label: 'Max range [m]', value: '450', bar: 0.66 } },
