@@ -13,6 +13,7 @@ import { DroneOverlay } from './components/DroneOverlay';
 
 export const App: React.FC = () => {
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     // Initialize Lenis smooth scroll
     const lenis = new Lenis({
       duration: 1.2,
