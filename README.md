@@ -1,36 +1,32 @@
-# Promptedsite LiDAR Inspection Drone Platform
+# Drone — Interactive LiDAR Experience
 
-Next-generation interactive 3D web application showcasing an autonomous LiDAR drone inspection system with real-time point-cloud scanning, defect detection, and structural telemetry.
+Editable React sections and strict TypeScript scene code with explicit GPU resource disposal.
 
-## Features
+## Run
 
-- **Interactive 3D Three.js Drone**: Scroll-driven flight dynamics, rotor rotation with shutter physics, and gimbal mouse tracking.
-- **Topography & Terrain Viewer**: 3D point cloud surface elevation inspection and interactive defect classification markers.
-- **Telemetry Video Showcase**: Embedded inline video loops demonstrating structural defect recognition across energy, geospatial, industry, and civil infrastructure.
-- **Lenis Smooth Scrolling**: Decoupled inertial scroll animations integrated seamlessly with WebGL render loops.
-- **High-Performance Architecture**: Built with Vite, React 19, TypeScript, and Tailwind CSS tokens.
+Use Node.js 22+ and npm.
 
-## Tech Stack
-
-- **Framework**: React 19 + TypeScript
-- **Bundler**: Vite
-- **3D & Graphics**: Three.js + WebGL (DRACO & Meshopt compression)
-- **Animation**: GSAP + Lenis Smooth Scroll
-- **Styling**: Tailwind CSS
-
-## Development
-
-```bash
-# Install dependencies
-npm install
-
-# Start local development server
+```sh
+npm ci
 npm run dev
-
-# Build production bundle
-npm run build
 ```
 
-## License
+Production media loads from the versioned public R2 manifest in src/config/assets.json. No cloud credentials are required or included.
 
-MIT © Promptedsite 2026. All rights reserved.
+## Browser preview
+
+```sh
+npm run build:artifact
+npm run preview
+```
+
+The complete dist/ folder contains same-origin media verified against the release checksums. Mount the entire folder in a preview capable of serving companion files and WebGL. A shell localhost address is not a preview accessible from another device. Platform CSP or missing Artifact capabilities cannot be fixed by a prompt.
+
+## Build
+
+```sh
+npm run build
+npm run assets:verify
+```
+
+GitHub is used only for the media fallback. Dependencies and existing license notices are retained. This package contains no Git history, credentials, migration reports, or bundled product media. Worker/decoder runtime code may remain local.
